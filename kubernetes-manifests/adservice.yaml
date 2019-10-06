@@ -16,6 +16,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adservice
+  namespace: hipster
 spec:
   selector:
     matchLabels:
@@ -30,7 +31,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/wp-msimons/adservice:741c669
+        image: gcr.io/wp-msimons/adservice
         ports:
         - containerPort: 9555
         env:
@@ -55,16 +56,3 @@ spec:
           periodSeconds: 15
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:9555"]
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: adservice
-spec:
-  type: ClusterIP
-  selector:
-    app: adservice
-  ports:
-  - name: grpc
-    port: 9555
-    targetPort: 9555
