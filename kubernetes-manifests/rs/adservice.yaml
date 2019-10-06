@@ -21,7 +21,7 @@ spec:
       - env:
         - name: PORT
           value: "9555"
-        image: gcr.io/wp-msimons/adservice
+        image: gcr.io/wp-msimons/adservice@sha256:33ec54a64bef69e912f27e116d12b657cdae8f143d7274f6d29337db40ce2c7c
         imagePullPolicy: Always
         livenessProbe:
           exec:
