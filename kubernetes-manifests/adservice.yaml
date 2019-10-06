@@ -30,7 +30,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/wp-msimons/adservice:741c669
+        image: gcr.io/wp-msimons/adservice
         ports:
         - containerPort: 9555
         env:
