@@ -22,13 +22,15 @@ spec:
       app: adservice
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
       labels:
         app: adservice
     spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: adservice
+        image: gcr.io/wp-msimons/adservice:741c669
         ports:
         - containerPort: 9555
         env:

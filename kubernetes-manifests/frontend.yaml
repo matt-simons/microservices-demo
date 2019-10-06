@@ -22,12 +22,14 @@ spec:
       app: frontend
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
       labels:
         app: frontend
     spec:
       containers:
         - name: server
-          image: frontend
+          image: gcr.io/wp-msimons/frontend:741c669
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -38,14 +40,6 @@ spec:
               httpHeaders:
               - name: "Cookie"
                 value: "shop_session-id=x-readiness-probe"
-          livenessProbe:
-            initialDelaySeconds: 10
-            httpGet:
-              path: "/_healthz"
-              port: 8080
-              httpHeaders:
-              - name: "Cookie"
-                value: "shop_session-id=x-liveness-probe"
           env:
           - name: PRODUCT_CATALOG_SERVICE_ADDR
             value: "productcatalogservice:3550"

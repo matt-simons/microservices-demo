@@ -23,25 +23,16 @@ spec:
   replicas: 1
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
       labels:
         app: loadgenerator
     spec:
       terminationGracePeriodSeconds: 5
       restartPolicy: Always
-      initContainers:
-      - name: wait-frontend
-        image: alpine:3.6
-        command: ['sh', '-c', 'set -x;  apk add --no-cache curl && 
-          until timeout -t 2 curl -f "http://${FRONTEND_ADDR}"; do 
-            echo "waiting for http://${FRONTEND_ADDR}"; 
-            sleep 2;
-          done;']
-        env:
-        - name: FRONTEND_ADDR
-          value: "frontend:80"
       containers:
       - name: main
-        image: loadgenerator
+        image: gcr.io/wp-msimons/loadgenerator:741c669
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"

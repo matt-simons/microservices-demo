@@ -24,11 +24,13 @@ spec:
     metadata:
       labels:
         app: cartservice
+      annotations:
+        sidecar.istio.io/inject: "true"
     spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: cartservice
+        image: gcr.io/wp-msimons/cartservice:741c669
         ports:
         - containerPort: 7070
         env:

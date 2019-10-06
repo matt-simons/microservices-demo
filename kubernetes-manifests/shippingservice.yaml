@@ -22,12 +22,14 @@ spec:
       app: shippingservice
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
       labels:
         app: shippingservice
     spec:
       containers:
       - name: server
-        image: shippingservice
+        image: gcr.io/wp-msimons/shippingservice:741c669
         ports:
         - containerPort: 50051
         readinessProbe:

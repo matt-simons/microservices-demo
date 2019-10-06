@@ -22,13 +22,15 @@ spec:
       app: recommendationservice
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
       labels:
         app: recommendationservice
     spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: recommendationservice
+        image: gcr.io/wp-msimons/recommendationservice:741c669
         ports:
         - containerPort: 8080
         readinessProbe:

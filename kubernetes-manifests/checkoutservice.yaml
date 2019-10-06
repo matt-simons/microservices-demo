@@ -24,10 +24,12 @@ spec:
     metadata:
       labels:
         app: checkoutservice
+      annotations:
+        sidecar.istio.io/inject: "true"
     spec:
       containers:
         - name: server
-          image: checkoutservice
+          image: gcr.io/wp-msimons/checkoutservice:741c669
           ports:
           - containerPort: 5050
           readinessProbe:

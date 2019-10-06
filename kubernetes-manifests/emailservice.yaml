@@ -22,13 +22,15 @@ spec:
       app: emailservice
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
       labels:
         app: emailservice
     spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: emailservice
+        image: gcr.io/wp-msimons/emailservice:741c669
         ports:
         - containerPort: 8080
         readinessProbe:
